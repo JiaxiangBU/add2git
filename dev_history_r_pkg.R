@@ -70,14 +70,16 @@ glue::glue("Add metadata
 usethis::use_github()
 
 
-git2r::remote_add(name = "origin",
-                  url = glue::glue("https://github.com/JiaxiangBU/{add2pkg::proj_name()}.git"))
+# git2r::remote_add(name = "origin",
+#                   url = glue::glue("https://github.com/JiaxiangBU/{add2pkg::proj_name()}.git"))
 git2r::push(name = 'origin', refspec = "refs/heads/master", cred = git2r::cred_token(),
             set_upstream = TRUE
             # Only one
             )
 
 # coding ------------------------------------------------------------------
+
+use_r("commit2news")
 
 # add title
 
