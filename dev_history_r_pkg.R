@@ -19,11 +19,20 @@ usethis::use_code_of_conduct()
 # desc --------------------------------------------------------------------
 
 library(usethis)
-add2pkg::create_desc()
-author_info <- add2pkg::add_me(is_paste = TRUE)
-desc_lines <- readr::read_lines("DESCRIPTION")
-desc_lines[5] <- author_info
-desc_lines %>% readr::write_lines("DESCRIPTION")
+# add2pkg::create_desc()
+desc::desc_set_authors(
+    person(
+        given = "Jiaxiang",
+        family = "Li",
+        role = c("aut", "cre"),
+        email = "alex.lijiaxiang@foxmail.com",
+        comment = c(ORCID = "https://orcid.org/0000-0003-3196-6492")
+    )
+)
+# author_info <- add2pkg::add_me(is_paste = TRUE)
+# desc_lines <- readr::read_lines("DESCRIPTION")
+# desc_lines[5] <- author_info
+# desc_lines %>% readr::write_lines("DESCRIPTION")
 # file.edit("DESCRIPTION")
 library(tidyverse)
 
@@ -34,11 +43,11 @@ if (file.exists("README.Rmd")) {
     file.edit("README-bak.Rmd")
 }
 use_readme_rmd()
-read_lines("README.Rmd")[1:20] %>%
+read_lines("README.Rmd")[1:22] %>%
     c("") %>%
     c('`r add2pkg::add_disclaimer("Jiaxiang Li")`') %>%
     write_lines("README.Rmd")
-file.remove("README-bak.Rmd")
+safely(file.remove)("README-bak.Rmd")
 file.edit("README.Rmd")
 rmarkdown::render("README.Rmd")
 rstudioapi::viewer("README.html")
@@ -57,6 +66,8 @@ glue::glue("Add metadata
 1. `%>%`
 ") %>% git2r::commit(message = .)
 
+
+usethis::use_github()
 
 
 git2r::remote_add(name = "origin",
